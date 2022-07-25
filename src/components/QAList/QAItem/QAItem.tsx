@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import { IQAList } from "../../../models/QAModels";
 import Button from "../../shared/Button/Button";
 interface IProps {
@@ -24,4 +24,4 @@ const QAItem: FC<IProps> = ({ item }) => {
   );
 };
 
-export default QAItem;
+export default memo(QAItem);
