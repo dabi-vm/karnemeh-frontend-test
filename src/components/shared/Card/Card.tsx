@@ -1,19 +1,17 @@
-import { FC, memo } from "react";
+import { FC, memo, ReactNode } from "react";
 import { IQAList } from "../../../models/QAModels";
-import Button from "../../shared/Button/Button";
 import avatar2 from "../../../assets/img/avatar-2.jpg";
 import comments from "../../../assets/svg/comments.svg";
 import { getIRDate, getIRTime } from "../../../services/commonFunc";
-import { useHistory } from "react-router-dom";
+
 interface IProps {
   item: IQAList;
+  action?: ReactNode;
 }
-const QAItem: FC<IProps> = ({ item }) => {
-  const history = useHistory();
-
+const QAItem: FC<IProps> = ({ item, action }) => {
   return (
     <div className="min-w-full">
-      <div className="flex flex-col grow mx-10 my-5 shadow">
+      <div className="flex flex-col grow mx-10 my-5 shadow rounded-lg">
         <div className="basis-full flex flex-row justify-between bg-white p-2 rounded-lg">
           <div className="flex items-center">
             <img
@@ -34,25 +32,29 @@ const QAItem: FC<IProps> = ({ item }) => {
               <span>{getIRDate(item.date)}</span>
             </div>
             <div className="flex items-center mr-5">
-              <img
-                src={comments}
-                alt="comments"
-                className="ml-2 mx-5 w-4 h-4"
-              />
-              <span className="text-gray-400 ml-4">{item.replies.length}</span>
+              {item.replies && (
+                <>
+                  <img
+                    src={comments}
+                    alt="comments"
+                    className="ml-2 mx-5 w-4 h-4"
+                  />
+                  <span className="text-gray-400 ml-4">
+                    {item.replies.length}
+                  </span>
+                </>
+              )}
             </div>
           </div>
         </div>
-        <div className="basis-full bg-[#F9F9F9] p-3">
+        <div className="basis-full bg-[#F9F9F9] p-3 mb-2">
           <p>{item.desc}</p>
         </div>
-        <div className="basis-full bg-[#F9F9F9] p-5 flex flex-row-reverse">
-          <Button
-            text="مشاهده جزییات"
-            color="#27AE60"
-            onClick={() => item.id && history.push(item.id)}
-          />
-        </div>
+        {action && (
+          <div className="basis-full bg-[#F9F9F9] p-5 flex flex-row-reverse">
+            {action}
+          </div>
+        )}
       </div>
     </div>
   );

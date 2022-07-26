@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IQAList, IReply } from "../models/QAModels";
+import { IQAList } from "../models/QAModels";
 import agent from "../services/agent";
 import { AppThunk } from "./store";
 
@@ -20,7 +20,7 @@ export const qaSlice = createSlice({
     },
     addReply: (
       state,
-      action: PayloadAction<{ reply: IReply; id: string }>
+      action: PayloadAction<{ reply: IQAList; id: string }>
     ) => {},
   },
 });
@@ -32,6 +32,9 @@ export const getQAList = (): AppThunk => async (dispatch) => {
 };
 
 export const selectData = (state: { qa: { data: IQAList[] } }) => state.qa.data;
+export const selectQAById =
+  (id: string) => (state: { qa: { data: IQAList[] } }) =>
+    state.qa.data.find((el) => el.id === id);
 export const { setData } = qaSlice.actions;
 
 export default qaSlice.reducer;

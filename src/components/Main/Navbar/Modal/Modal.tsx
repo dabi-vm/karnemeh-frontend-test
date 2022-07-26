@@ -1,6 +1,6 @@
 import { FC } from "react";
-import Button from "./Button/Button";
-import close from "../../assets/svg/Close.svg";
+import Button from "../../../shared/Button/Button";
+import close from "../../../../assets/svg/Close.svg";
 interface IProps {
   openModal: boolean;
   setOpenModal(s: boolean): void;

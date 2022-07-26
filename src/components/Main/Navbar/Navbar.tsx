@@ -5,7 +5,7 @@ import arrow from "../../../assets/svg/Polygon.svg";
 import { IQAList } from "../../../models/QAModels";
 import agent from "../../../services/agent";
 import { getQAList } from "../../../store/qaSlice";
-import Modal from "../../shared/Modal";
+import Modal from "./Modal/Modal";
 
 export const Navbar = () => {
   const [openModal, setOpenModal] = useState(false);

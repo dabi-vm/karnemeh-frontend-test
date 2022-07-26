@@ -1,16 +1,14 @@
-export interface IReply {
-  id: string;
-  title: string;
-  desc: string;
-  date: Date;
-  like: number;
-  dislike: number;
-}
-
-export interface IQAList {
+interface IGeneralItem {
   id?: string;
   title: string;
   desc: string;
   date: Date;
+}
+export interface IQAList extends IGeneralItem {
   replies: IReply[];
+}
+
+export interface IReply extends IGeneralItem {
+  like: number;
+  dislike: number;
 }
