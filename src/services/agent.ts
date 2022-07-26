@@ -38,6 +38,8 @@ const QA = {
   list: (limit: number = 10, page: number = 1): Promise<IQAList[]> =>
     requests.get(`/QAList?_page=${page}&limit=${limit}`),
   addQA: (form: IQAList): Promise<any> => requests.post("/QAList", form),
+  replyPoint: (qaId: string, form: IQAList): Promise<any> =>
+    requests.put(`/QAList/${qaId}`, form),
 };
 
 export default { QA };

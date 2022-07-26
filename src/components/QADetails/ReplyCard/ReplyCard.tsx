@@ -1,9 +1,9 @@
 import { FC, memo, ReactNode } from "react";
-import { IReply } from "../../models/QAModels";
-import { getIRDate, getIRTime } from "../../services/commonFunc";
-import avatar2 from "../../assets/img/avatar-2.jpg";
-import like from "../../assets/svg/Happy.svg";
-import dislike from "../../assets/svg/Sad.svg";
+import { IReply } from "../../../models/QAModels";
+import { getIRDate, getIRTime } from "../../../services/commonFunc";
+import avatar2 from "../../../assets/img/avatar-2.jpg";
+import like from "../../../assets/svg/Happy.svg";
+import dislike from "../../../assets/svg/Sad.svg";
 
 interface IProps {
   item: IReply;
