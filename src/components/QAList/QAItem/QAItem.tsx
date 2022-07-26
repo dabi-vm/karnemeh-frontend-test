@@ -4,10 +4,13 @@ import Button from "../../shared/Button/Button";
 import avatar2 from "../../../assets/img/avatar-2.jpg";
 import comments from "../../../assets/svg/comments.svg";
 import { getIRDate, getIRTime } from "../../../services/commonFunc";
+import { useHistory } from "react-router-dom";
 interface IProps {
   item: IQAList;
 }
 const QAItem: FC<IProps> = ({ item }) => {
+  const history = useHistory();
+
   return (
     <div className="flex flex-col grow m-10 shadow">
       <div className="basis-full flex flex-row justify-between bg-white p-2 rounded-lg">
@@ -31,7 +34,7 @@ const QAItem: FC<IProps> = ({ item }) => {
           </div>
           <div className="flex items-center mr-5">
             <img src={comments} alt="comments" className="ml-2 mx-5 w-4 h-4" />
-            <span className="text-gray-400 ml-4">20</span>
+            <span className="text-gray-400 ml-4">{item.replies.length}</span>
           </div>
         </div>
       </div>
@@ -42,7 +45,7 @@ const QAItem: FC<IProps> = ({ item }) => {
         <Button
           text="مشاهده جزییات"
           color="#27AE60"
-          onClick={() => console.log()}
+          onClick={() => history.push(item.id)}
         />
       </div>
     </div>
