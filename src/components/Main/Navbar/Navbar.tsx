@@ -1,10 +1,15 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import avatar from "../../../assets/img/avatar.jpg";
 import arrow from "../../../assets/svg/Polygon.svg";
+import { IQAList } from "../../../models/QAModels";
+import agent from "../../../services/agent";
+import { getQAList } from "../../../store/qaSlice";
 import Modal from "../../shared/Modal";
 
 export const Navbar = () => {
   const [openModal, setOpenModal] = useState(false);
+  const dispatch = useDispatch();
 
   const submitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -12,11 +17,17 @@ export const Navbar = () => {
       title: { value: string };
       desc: { value: string };
     };
-    const values = {
+    const values: IQAList = {
       title: target.title.value,
       desc: target.desc.value,
+      date: new Date(),
+      replies: [],
     };
-    
+    agent.QA.addQA(values).then(() => {
+      alert("سوال شما با موفقیت اضافه شد");
+      setOpenModal(false);
+      dispatch(getQAList() as any);
+    });
   };
   return (
     <>

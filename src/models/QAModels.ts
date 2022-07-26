@@ -8,7 +8,7 @@ export interface IReply {
 }
 
 export interface IQAList {
-  id: string;
+  id?: string;
   title: string;
   desc: string;
   date: Date;

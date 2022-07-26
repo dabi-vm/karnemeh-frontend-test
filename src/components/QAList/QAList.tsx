@@ -16,7 +16,7 @@ export const QAList = () => {
   return (
     <>
       <Navbar />
-      <main className="relative pt-20 items-start flex h-screen bg-[#F7F8F9]">
+      <main className="relative pt-20 items-start flex flex-col h-screen bg-[#F7F8F9]">
         {qaListData?.map((item: IQAList) => (
           <QAItem key={item.id} item={item} />
         ))}
