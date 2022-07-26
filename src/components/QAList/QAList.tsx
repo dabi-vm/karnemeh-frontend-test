@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Navbar } from "../Main/Navbar/Navbar";
 import QAItem from "./QAItem/QAItem";
 import { getQAList, selectData } from "../../store/qaSlice";
