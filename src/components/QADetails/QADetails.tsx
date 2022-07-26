@@ -49,8 +49,8 @@ export const QADetails = () => {
         ...item,
         replies: [...item.replies, values],
       }).then(() => {
-        alert("پاسخ شما با موفقیت اضافه شد");
         dispatch(getQAList() as any);
+        alert("پاسخ شما با موفقیت اضافه شد");
       });
     }
   };
