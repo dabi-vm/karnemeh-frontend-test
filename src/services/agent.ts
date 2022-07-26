@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { IQAList } from "../models/QAModels";
 
-// axios.defaults.withCredentials = true;
+// config axios default options
 axios.interceptors.request.use(
   async (config) => {
     config.baseURL = `http://localhost:8000/`;
@@ -34,6 +34,7 @@ const requests = {
   del: (url: string) => axios.delete(url).then(responseBody),
 };
 
+// API's requests
 const QA = {
   list: (limit: number = 10, page: number = 1): Promise<IQAList[]> =>
     requests.get(`/QAList?_page=${page}&limit=${limit}`),

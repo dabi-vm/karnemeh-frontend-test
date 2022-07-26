@@ -12,6 +12,7 @@ export const QAList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // get Q&A list with redux thunk and set it to store
     dispatch(getQAList() as any);
   }, []);
 

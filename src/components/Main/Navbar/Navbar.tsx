@@ -11,8 +11,10 @@ export const Navbar = () => {
   const [openModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();
 
+  // Post a new Q&A to API
   const submitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    // Make form values object
     const target = e.target as typeof e.target & {
       title: { value: string };
       desc: { value: string };
@@ -23,9 +25,11 @@ export const Navbar = () => {
       date: new Date(),
       replies: [],
     };
+    // Call post API
     agent.QA.addQA(values).then(() => {
       alert("سوال شما با موفقیت اضافه شد");
       setOpenModal(false);
+      // dispatch Q&A list for refetch and update app
       dispatch(getQAList() as any);
     });
   };

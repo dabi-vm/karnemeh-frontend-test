@@ -14,6 +14,7 @@ export const AddReply: FC<IProps> = ({ onSubmit }) => {
         className="w-full"
         onSubmit={(e) => {
           onSubmit(e);
+          // reset form after submit
           if (formRef.current !== null) {
             formRef.current.reset();
           }

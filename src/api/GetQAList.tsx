@@ -7,6 +7,7 @@ export interface IApiResponse {
   loading: Boolean;
 }
 
+// get Q&A API and make customHook
 export const GetQAList = (limit: number, offset: number): IApiResponse => {
   const [data, setData] = useState<any>();
   const [error, setError] = useState<any>();

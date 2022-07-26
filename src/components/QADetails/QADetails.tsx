@@ -14,24 +14,33 @@ export const QADetails = () => {
   const item = useSelector(selectQAById(param.id));
   const dispatch = useDispatch();
 
+  // submit like and dislike
   const handlePoint = (reply: IReply, like: boolean) => {
     if (item) {
+      // create array of replies with old items and new one
+      const replies = [
+        ...item.replies.filter((x) => x.id !== reply.id),
+        {
+          ...reply,
+          like: like ? reply.like + 1 : reply.like,
+          dislike: !like ? reply.dislike + 1 : reply.dislike,
+        },
+      ];
+      // call a PUT API to submit changes
       agent.QA.replyPoint(param.id, {
         ...item,
-        replies: [
-          ...item.replies.filter((x) => x.id !== reply.id),
-          {
-            ...reply,
-            like: like ? reply.like + 1 : reply.like,
-            dislike: !like ? reply.dislike + 1 : reply.dislike,
-          },
-        ],
-      }).then(() => dispatch(getQAList() as any));
+        replies: replies,
+      }).then(() => {
+        // dispatch Q&A list for refetch and update app
+        dispatch(getQAList() as any);
+      });
     }
   };
 
+  // post new reply to Q&A
   const submitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    // make an object from values of form
     const target = e.target as typeof e.target & {
       title: { value: string };
       desc: { value: string };
@@ -45,16 +54,19 @@ export const QADetails = () => {
       dislike: 0,
     };
     if (item) {
+      // call a PUT API to submit new reply to Q&A
       agent.QA.addReply(param.id, {
         ...item,
         replies: [...item.replies, values],
       }).then(() => {
+        // dispatch Q&A list for refetch and update app
         dispatch(getQAList() as any);
         alert("پاسخ شما با موفقیت اضافه شد");
       });
     }
   };
 
+  // Refetch data on suddenly page refresh. Its a lazy alternative for redux-persist :)
   useEffect(() => {
     if (!item) {
       dispatch(getQAList() as any);
