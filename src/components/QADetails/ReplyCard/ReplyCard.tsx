@@ -20,7 +20,7 @@ const ReplyCard: FC<IProps> = ({ item, action }) => {
               alt="avatar"
               className="rounded-xl mx-3 w-[32px] h-[32px]"
             />
-            <h3 className="font-semibold">{item.title}</h3>
+            <h3 className="font-semibold">علی کیا</h3>
           </div>
           <div className="flex items-center">
             <div>

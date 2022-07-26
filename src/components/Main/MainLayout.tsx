@@ -7,7 +7,7 @@ export const MainLayout = () => {
     <>
       <BrowserRouter>
         <Navbar />
-        <main className="relative pt-20 items-start flex flex-col h-screen bg-[#F7F8F9]">
+        <main className="relative pt-20 items-start flex flex-col bg-[#F7F8F9]">
           <Switch>
             {Routes.map((route) => (
               <Route

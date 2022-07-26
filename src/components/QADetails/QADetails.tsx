@@ -11,10 +11,7 @@ import ReplyCard from "./ReplyCard/ReplyCard";
 
 export const QADetails = () => {
   const param: { id: string } = useParams();
-  console.log(param.id);
-
   const item = useSelector(selectQAById(param.id));
-  console.log(item);
   const dispatch = useDispatch();
 
   const handlePoint = (reply: IReply, like: boolean) => {
@@ -30,6 +27,31 @@ export const QADetails = () => {
           },
         ],
       }).then(() => dispatch(getQAList() as any));
+    }
+  };
+
+  const submitHandler = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    const target = e.target as typeof e.target & {
+      title: { value: string };
+      desc: { value: string };
+    };
+    const values: IReply = {
+      id: new Date().toString(),
+      title: target.title.value,
+      desc: target.desc.value,
+      date: new Date(),
+      like: 0,
+      dislike: 0,
+    };
+    if (item) {
+      agent.QA.addReply(param.id, {
+        ...item,
+        replies: [...item.replies, values],
+      }).then(() => {
+        alert("پاسخ شما با موفقیت اضافه شد");
+        dispatch(getQAList() as any);
+      });
     }
   };
 
@@ -63,9 +85,8 @@ export const QADetails = () => {
           }
         />
       ))}
-      <h1 className="font-bold text-2xl px-10">پاسخ خود را ثبت کنید</h1>
-      <p></p>
-      <AddReply onSubmit={() => console.log()} />
+      <h1 className="font-bold text-3xl px-10">پاسخ خود را ثبت کنید</h1>
+      <AddReply onSubmit={submitHandler} />
     </>
   );
 };
